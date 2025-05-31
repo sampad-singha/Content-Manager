@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Content;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ContentController extends Controller

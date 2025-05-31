@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -35,5 +36,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/contents/{id}/update', [ContentController::class, 'updateContent'])->name('contents.update');
     Route::delete('/contents/{content}', [ContentController::class, 'destroy'])->name('contents.destroy');
 
+    Route::group(['prefix' => 'email'], function () {
+        Route::get('/', [EmailController::class, 'getAll']);
+        Route::get('/receiver', [EmailController::class, 'getEmailByReceiver']);
+        Route::post('/create', [EmailController::class, 'create'])->name('email.create');
+    });
 
 });
