@@ -16,6 +16,8 @@ class ContentFactory extends Factory
         return [
             'name' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
+            'content' => $this->faker->paragraph(),
+            'note' => $this->faker->paragraph(),
             'status' => $this->faker->randomElement(['active', 'inactive']),
             'university' => $this->faker->company(),
         ];

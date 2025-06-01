@@ -80,6 +80,9 @@ class ContentController extends Controller
         $content = Content::create([
             'name' => $request['name'],
             'description' => $description,
+            'university' => $request['university'],
+            'content' => $request['content'],
+            'note' => $request['note'],
             'status' => $request['status'],
         ]);
 

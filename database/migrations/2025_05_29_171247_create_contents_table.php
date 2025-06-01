@@ -17,6 +17,8 @@ class CreateContentsTable extends Migration
             $table->id();
             $table->string('name');
             $table->longText('description');
+            $table->longText('content');
+            $table->longText('note');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->string('university');
             $table->timestamps();
