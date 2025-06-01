@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('styles')
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+@endpush
+
 @section('content')
     <div class="container">
         <h2>Edit Content</h2>
@@ -10,6 +14,7 @@
 
         <form action="{{ route('contents.update', $content->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
 
             <div class="mb-3">
                 <label for="name" class="form-label">Content Name</label>
@@ -18,7 +23,7 @@
 
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea name="description" class="form-control" rows="4">{{ old('description', $content->description) }}</textarea>
+                <textarea id="markdown-editor" name="description">{{ old('description', $content->description) }}</textarea>
             </div>
 
             <div class="mb-3">
@@ -56,3 +61,12 @@
         </form>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            new EasyMDE({ element: document.getElementById("markdown-editor") });
+        });
+    </script>
+@endpush

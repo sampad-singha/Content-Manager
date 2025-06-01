@@ -7,11 +7,14 @@
     <div class="container">
         <h3 class="mb-4">Emails</h3>
         <div class="row">
-            <form action='/email/receiver'>
-                @csrf
-                <input name="receiver" type="text" class="form-control mb-3" placeholder="Search by Receiver Email" value="{{ request('receiver') }}">
-                <button type="submit" class="btn btn-primary">Search by Receiver</button>
-            </form>
+            <div class="">
+                <a href='/email/create' class="btn btn-success">Create New Email</a>
+                <form action='/email/receiver'>
+                    @csrf
+                    <input name="receiver" type="text" class="form-control mb-3" placeholder="Search by Receiver Email" value="{{ request('receiver') }}">
+                    <button type="submit" class="btn btn-primary">Search by Receiver</button>
+                </form>
+            </div>
             @foreach($emails as $email)
                 <div class="col-md-4 mb-4">
                     <div class="card">

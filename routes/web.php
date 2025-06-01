@@ -33,13 +33,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/contents', [ContentController::class, 'showContent'])->name('contents.index');
     Route::get('/contents/{id}', [ContentController::class, 'showContentById'])->name('contents.show');
     Route::post('/contents', [ContentController::class, 'store'])->name('contents.store');
-    Route::post('/contents/{id}/update', [ContentController::class, 'updateContent'])->name('contents.update');
+    Route::put('/contents/{id}/update', [ContentController::class, 'updateContent'])->name('contents.update');
     Route::delete('/contents/{content}', [ContentController::class, 'destroy'])->name('contents.destroy');
 
     Route::group(['prefix' => 'email'], function () {
         Route::get('/', [EmailController::class, 'getAll']);
         Route::get('/receiver', [EmailController::class, 'getEmailByReceiver']);
-        Route::post('/create', [EmailController::class, 'create'])->name('email.create');
+        Route::get('/create', [EmailController::class, 'create'])->name('email.create');
+        Route::post('/create', [EmailController::class, 'store'])->name('email.store');
     });
 
 });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\EmailService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use PhpParser\Node\Stmt\TryCatch;
 
 class EmailController extends Controller
 {
@@ -41,9 +42,19 @@ class EmailController extends Controller
     /**
      * @throws \Exception
      */
-    public function create(Request $request)
+
+    public function create()
     {
-        $response = $this->emailService->create($request->all());
-        dd($response);
+        return view('emails.create');
+    }
+    public function store(Request $request)
+    {
+        try{
+            $response = $this->emailService->create($request->all());
+            dd($response);
+        }catch (\Exception $exception){
+            Log::error('Error fetching email: ' . $exception->getMessage());
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
     }
 }

@@ -2,25 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ContentsDataTable;
 use App\Models\Content;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Yajra\DataTables\DataTables;
 
 class ContentController extends Controller
 {
-    public function showContent(Request $request)
+
+    /**
+     * @throws \Exception
+     */
+    public function showContent(ContentsDataTable $dataTable)
     {
-        $perPage = $request->input('per_page', 10);
-        $contents = Content::with('media')->paginate($perPage);
+        $universities = \App\Models\Content::select('university')->distinct()->pluck('university');
+//        return view('contents.index', compact('universities'));
 
-        return view('all-contents', [
-            'contents' => $contents,
-            'perPage' => $perPage,
-        ]);
-
+        return $dataTable->render('all-contents',compact('universities'));
     }
 
     public function showContentById($id)
@@ -72,11 +74,12 @@ class ContentController extends Controller
 
     public function store(Request $request)
     {
+        $description = json_decode($request->description, true);
 
         // Create content
         $content = Content::create([
             'name' => $request['name'],
-            'description' => $request['description'],
+            'description' => $description,
             'status' => $request['status'],
         ]);
 

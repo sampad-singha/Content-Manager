@@ -55,7 +55,7 @@ class EmailService
             $data,
             [
                 'receiver' => 'required|email',
-                'subject' => 'required|string|max:255',
+                'subject' => 'required|string|max:255|min:155',
                 'body' => 'required|string',
             ]
         );

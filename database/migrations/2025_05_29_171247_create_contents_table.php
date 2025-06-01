@@ -18,6 +18,7 @@ class CreateContentsTable extends Migration
             $table->string('name');
             $table->longText('description');
             $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->string('university');
             $table->timestamps();
         });
     }
